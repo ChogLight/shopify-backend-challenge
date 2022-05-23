@@ -7,21 +7,27 @@
   </head>
   <body>
     <h3>Item list</h3>
-                <p class = "text-left">Welcome to the item CRUD. Click on the button bellow to add a new Item or click on the Warehouse list to check the items per warehouse
-                </p>
+    <p class = "text-left">Welcome to the item CRUD. Click on the button bellow to add a new Item, click on create new warehouse to create a new warehouse or click on the Warehouse list to check the items per warehouse
+    </p>
+    <a href ="/add" class="btn btn-success btn-sm>">
+      <i class="fas fa-trash-alt"></i>&nbsp;Add Item
+    </a>
+    <a href ="/addWarehouse>" class="btn btn-success btn-sm>">
+      <i class="fas fa-trash-alt"></i>&nbsp;Add Warehouse
+    </a>
+    <a href ="/warehouseList>" class="btn btn-success btn-sm>">
+      <i class="fas fa-trash-alt"></i>&nbsp;Warehouse List
+    </a>
     <table class = "table">
       <thead>
         <tr>
           <th scope="col">#</th>
           <th scope="col">Item Name</th>
           <th scope="col">Price</th>
-          <th scope="col">Quantity available</th>
-          <th scope="col">Warehouse</th>
         </tr>
       </thead>
       <tbody>
         <% for(let count=0; count < items.length; count++) { %>
-          <% if(displayName != '') {%>
             <tr>
               <th scope="row">
                 <%=count + 1%> 
@@ -30,23 +36,20 @@
                 <%=items[count].Name%>
               </td>
               <td>
-                <%=items[count].Price%>
+                $<%=items[count].Price%>
               </td>
               <td>
-                <%=items[count].Quantity%>
+                <a href ="/edit/<%=items[count]._id %>" class="btn btn-warning btn-sm>">
+                  <i class="fas fa-trash-alt"></i>&nbsp;Edit
+              </a>
               </td>
-              <td>
-                <%=items[count].Warehouse%>
-              </td>
-              <a href ="/edit/<%=items[count]._id %>" class="btn btn-warning btn-sm>">
-                <i class="fas fa-trash-alt"></i>&nbsp;Edit
-            </a>
               <td>
                 <a href ="/delete/<%=items[count]._id %>" class="btn btn-danger btn-sm>">
                   <i class="fas fa-trash-alt"></i>&nbsp;Delete
               </a>
               </td>
             </tr>
+            <% }%>
       </tbody>
     </table>
   </body>
