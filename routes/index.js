@@ -55,4 +55,94 @@ router.get("/delete/:id", (req, res, next) => {
   });
 });
 
+/*GET add warehouse */
+router.get('/addWarehouse', function(req, res, next){
+  res.render('addWarehouse', {
+    title: 'Add new Warehouse'
+  })
+})
+
+/*POST add warehouse */
+router.post('/addWarehouse', function(req,res,next){
+  let newWarehouse = new warehouses({
+      Name: req.body.warehouseName,
+  })
+  warehouses.create(newWarehouse, (err, item) => {
+    if(err){
+      console.log(err);
+      res.end(err);
+    }
+    else{
+      res.redirect('/')
+    }
+  })
+})
+/*GET warehouse list */
+router.get('/warehouseList', function(req, res, next){
+  warehouses.find((err, warehouses) => {
+    if(err){
+      return console.log(err);
+    }
+    else{
+      res.render('warehouse', { 
+        title: 'Home',
+        warehouses: warehouses
+      });
+    }
+  })
+})
+
+/*GET warehouse item list*/
+router.get('/check/:id', function(req, res, next){
+  items.find((err, items) => {
+    if(err){
+      return console.log(err);
+    }
+    else{
+      res.render('addItemWarehouse', { 
+        title: 'Add Item',
+        items: items 
+      });
+    }
+  })
+})
+
+/*POST warehouse add item*/
+router.post('/check/:id', function(req,res,next){
+
+})
+
+/*GET edit item page */
+router.get('/edit/:id', function(req, res, next){
+  items.findById(req.params.id,(err, item) => {
+    if(err){
+      return console.log(err);
+    }
+    else{
+      res.render('editItem', { 
+        title: 'Edit Item',
+        itemName: item.Name,
+        itemPrice: item.Price
+      });
+    }
+  })
+})
+/*POST edit item page */
+router.post('/edit/:id', (req, res, next) => {
+  let id = req.params.id;
+  let editeditem = items({
+    _id: id,
+    Name: req.body.itemName,
+    Price: req.body.itemPrice
+  });
+  items.updateOne({ _id: id }, editeditem, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
+
 module.exports = router;

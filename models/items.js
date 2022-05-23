@@ -12,10 +12,7 @@ let Item = mongoose.Schema(
         },
         Quantity:{
             type:Number
-        } ,
-        Warehouse:{
-            type: String
-        }
+        } 
     },
 
     {

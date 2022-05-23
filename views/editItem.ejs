@@ -6,15 +6,17 @@
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
-    <h3>Add new warehouse</h3>
-    <p class = "text-left">Please fill the form to add a warehouse
+    <h3>Edit Item</h3>
+    <p class = "text-left">Plase fill the form to add a new item
     </p>
    <form method="POST">
-        <lable for="warehouseName">Warehouse Name</lable>
-        <input id="warehouseName" name="warehouseName"></input>
+        <lable for="itemName">Item Name</lable>
+        <input id="itemName" name="itemName" value="<%=itemName%>"></input>
+        <lable for="itemPrice">Item Price</lable>
+        <input id="itemPrice" name="itemPrice" value="<%=itemPrice%>"></input>
         <input class = "btn btn-primary" type="submit" value="Save"></input>
         <a href ="/" class="btn btn-danger btn-sm>">
-            &nbsp;Cancel
+           &nbsp;Cancel
           </a>
    </form>
   </body>
