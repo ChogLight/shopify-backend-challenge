@@ -25,6 +25,7 @@ router.get('/add', function(req, res, next){
   })
 })
 
+/*POST add page */
 router.post('/add', function(req,res,next){
   let newItem = new items({
       Name: req.body.itemName,
@@ -40,5 +41,18 @@ router.post('/add', function(req,res,next){
     }
   })
 })
+
+/*GET delete item */
+router.get("/delete/:id", (req, res, next) => {
+  let id = req.params.id;
+  items.remove({ _id: id }, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.redirect("/");
+    }
+  });
+});
 
 module.exports = router;
