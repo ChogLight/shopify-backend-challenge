@@ -9,6 +9,9 @@
     <h3>Warehouse list</h3>
     <p class = "text-left">Select the warehouse you want to check
     </p>
+    <a href ="/" class="btn btn-danger btn-sm>">
+        &nbsp;Cancel
+      </a>
     <table class = "table">
       <thead>
         <tr>
@@ -20,7 +23,7 @@
         <% for(let count=0; count < warehouses.length; count++) { %>
             <tr>
               <th scope="row">
-                <%=count + 1%> 
+                <%=count + 1%>
               </th>
               <td>
                 <%=warehouses[count].Name%>
