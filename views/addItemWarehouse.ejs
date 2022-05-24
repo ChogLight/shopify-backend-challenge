@@ -4,37 +4,84 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+    <script>
+      function getId(s){
+        var itemId = s[s.selectedIndex].id
+        var itemTag = document.getElementById("itemId")
+        itemTag.value = itemId
+      }
+    </script>
   </head>
   <body>
     <h3>Warehouse list</h3>
     <p class = "text-left">Click on add item to add a new item to this warehouse
     </p>
-    <a href ="/" class="btn btn-danger btn-sm>">
+    <a href ="/warehouseList" class="btn btn-danger btn-sm>">
         &nbsp;Cancel
       </a>
+
+    <form method="POST">
+      <table class = "table">
+        <thead>
+          <tr>
+            <th scope="col">Item Name</th>
+            <th scope="col">Item Quantity</th>
+            <th scope="col">Item Price</th>
+          </tr>
+        </thead>
+        <tbody>
+              <tr>
+                <td>
+                  <select name="item" id="item" onchange = 'getId(this)'>
+                    <option></option>
+                    <% for(let count=0; count < items.length; count++) { %>
+                      <option id="<%=items[count]._id%>"><%=items[count].Name%></option>
+                    <% } %>
+                  </select>
+                </td>
+                <td hidden>
+                  <input id = "itemId" name="itemId"></input>
+                </td>
+                <td>
+                    <input name="itemQuantity" id="item quantity"></input>
+                </td>
+                <td>
+                    <input class = "btn btn-primary" type="submit" value="Save"></input>
+                </td>
+              </tr>
+        </tbody>
+      </table>
+
+
+    </form>
     <form method="POST">
         <table class = "table">
             <thead>
               <tr>
                 <th scope="col">Item Name</th>
                 <th scope="col">Item Quantity</th>
+                <th scope="col">Item Price</th>
               </tr>
             </thead>
             <tbody>
+                  
+                    <% for(let count=0; count < warehouses.length; count++) { %>
+                      <% if(warehouses[count]._id == warehouseId) { %>
+                        <% for(let counti=0; counti < warehouses[count].Items.length; counti++) { %>
+                      <td>
+                        <%=warehouses[count].Items[counti].Name%>
+                      </td>
+                      <td>
+                        <%=warehouses[count].Items[counti].Quantity%>
+                      </td>
+                      <td>
+                        $<%= warehouses[count].Items[counti].Price%>
+                      </td>
                   <tr>
-                    <td>
-                      <select name="item" id="item">
-                        <% for(let count=0; count < items.length; count++) { %>
-                          <option id="<%=items[count]._id%>"><%=items[count].Name%></option>
-                        <% } %>
-                      </select>
-                    </td>
-                    <td>
-                        <input name="itemQuantity" id="item quantity"> </input>
-                    </td>
-                    <td>
-                        <input class = "btn btn-primary" type="submit" value="Save"></input>
-                    </td>
+                    <% } %>
+                    <% } %>
+                  <% } %>
+
                   </tr>
             </tbody>
           </table>
@@ -42,3 +89,4 @@
     
   </body>
 </html>
+
